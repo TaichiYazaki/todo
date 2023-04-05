@@ -15,7 +15,10 @@ import (
 
 		//index
 		router.GET("/", func(c *gin.Context){
-			c.HTML(http.StatusOK, "index.html",gin.H{})
+			todos := mypkg.DbGetAll()
+			c.HTML(http.StatusOK, "index.html",gin.H{
+				"todos": todos,
+			})
 		})
 
 		//Create

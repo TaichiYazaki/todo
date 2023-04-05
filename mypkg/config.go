@@ -36,3 +36,14 @@ func DbInsert(text string, status string) {
 	}
 	db.Create(&Todo{Text: text, Status: status})
 }
+
+//DB全取得
+func DbGetAll() []Todo {
+	db, err := DatabaseConnection()
+	if err != nil {
+		panic("データベースが開けません")
+	}
+	var todos []Todo
+	db.Order("created_at desc").Find(&todos)
+	return todos
+}
